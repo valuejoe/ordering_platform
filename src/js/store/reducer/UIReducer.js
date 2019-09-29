@@ -2,12 +2,17 @@ import {
     OPEN_SHOPPINGCAR,
     CLOSE_SHOPPINGCAR,
     CHANGE_TAB,
+    SET_ERROR,
+    CLEAR_STATUS,
+    SET_SUCCESS
 } from "../action/type";
 
 const initState = {
     loading: false,
     shoppingCarOpen: false,
     tabSelectValue: 0,
+    errors: "",
+    success: ""
 };
 
 const UIReducer = (state = initState, action) => {
@@ -26,6 +31,22 @@ const UIReducer = (state = initState, action) => {
             return {
                 ...state,
                 tabSelectValue: action.payload
+            };
+        case SET_ERROR:
+            return {
+                ...state,
+                errors: action.payload
+            };
+        case CLEAR_STATUS:
+            return {
+                ...state,
+                errors: "",
+                success: false
+            };
+        case SET_SUCCESS:
+            return {
+                ...state,
+                success: action.payload
             };
         default:
             return state;

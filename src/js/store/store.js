@@ -3,10 +3,13 @@ import thunk from "redux-thunk";
 import dataReducer from "./reducer/dataReducer";
 import UIReducer from "./reducer/UIReducer";
 import authReducer from "./reducer/authReducer";
+import manageReducer from "./reducer/manageReducer";
+
 const rootReducer = combineReducers({
     data: dataReducer,
     UI: UIReducer,
-    auth: authReducer
+    auth: authReducer,
+    manage: manageReducer
 });
 
 const middleware = [thunk];
