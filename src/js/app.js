@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
 import ShoppingCar from "./component/shoppingCar/shopingCar";
 import ProductPage from "./component/product/productPage";

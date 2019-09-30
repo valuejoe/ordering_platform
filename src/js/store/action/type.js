@@ -17,8 +17,10 @@ export const SET_SUCCESS = "SET_SUCCESS";
 
 //auth reducer
 export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
 
 //manage reducer
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const ADD_MENU = "ADD_MENU";
 export const GET_CATEGORY = "GET_CATEGORY";
+export const GET_MENU = "GET_MENU";

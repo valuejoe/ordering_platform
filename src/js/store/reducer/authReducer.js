@@ -1,7 +1,7 @@
-import { LOGIN } from "../action/type";
+import { LOGIN, LOGOUT } from "../action/type";
 
 const initState = {
-    auth: true
+    auth: false
 };
 
 const authReducer = (state = initState, action) => {
@@ -10,6 +10,11 @@ const authReducer = (state = initState, action) => {
             return {
                 ...state,
                 auth: true
+            };
+        case LOGOUT:
+            return {
+                ...state,
+                auth: false
             };
         default:
             return state;

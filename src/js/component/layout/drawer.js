@@ -1,15 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Divider, Drawer, Hidden, IconButton } from "@material-ui/core";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import { AppBar, Toolbar, Typography, CssBaseline } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ListIcon from "@material-ui/icons/List";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
-import { relative } from "path";
-
+import { logoutAction } from "../../store/action/authAction";
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -21,9 +21,6 @@ const useStyles = makeStyles(theme => ({
             width: drawerWidth,
             flexShrink: 0
         }
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1
     },
     menuButton: {
         position: "fixed",
@@ -46,10 +43,15 @@ function ResponsiveDrawer(props) {
     const { container } = props;
     const classes = useStyles();
     const theme = useTheme();
+    const dispatch = useDispatch();
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
+    };
+
+    const handleClickLogout = () => {
+        dispatch(logoutAction());
     };
 
     const drawer = (
@@ -77,7 +79,7 @@ function ResponsiveDrawer(props) {
                     <ListItemText primary="帳號管理" />
                 </ListItem>
                 <Divider />
-                <ListItem button>
+                <ListItem button onClick={handleClickLogout}>
                     <ListItemText primary="登出" />
                 </ListItem>
             </List>

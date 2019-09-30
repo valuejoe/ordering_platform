@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, Paper, Grid } from "@material-ui/core";
-import { Container, FormControl, InputLabel, Select } from "@material-ui/core";
-import { MenuItem, ButtonBase, InputAdornment } from "@material-ui/core";
-import { FormHelperText } from "@material-ui/core";
+import { Container, ButtonBase, InputAdornment } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
-import {
-    addCategoryAction,
-    addMenuAction
-} from "../../store/action/manageAction";
+import { addCategoryAction } from "../../store/action/manageAction";
+import { addMenuAction } from "../../store/action/manageAction";
+import SelectCategory from "./selectCategory";
+
 const useStyle = makeStyles(theme => ({
     paper: {
         padding: theme.spacing(3),
@@ -26,7 +25,7 @@ const AddCategory = () => {
 
     //if success init data
     useEffect(() => {
-        setNewCategory("");
+        if (success) setNewCategory("");
     }, [success]);
 
     const handleChange = e => {
@@ -49,8 +48,8 @@ const AddCategory = () => {
                             value={newCategory}
                             fullWidth
                             onChange={handleChange}
-                            error={errors.name ? true : false}
-                            helperText={errors.name}
+                            error={errors.addCategory ? true : false}
+                            helperText={errors.addCategory}
                             InputProps={
                                 success.addCategory && {
                                     endAdornment: (
@@ -102,38 +101,6 @@ const UploadImag = props => {
     );
 };
 
-const SelectCategory = props => {
-    const { category } = useSelector(state => state.manage);
-    const { newData, errors } = props;
-    const handleChange = e => {
-        props.onSelect(e);
-    };
-    return (
-        <FormControl
-            style={{ minWidth: "150px" }}
-            error={errors.category ? true : false}
-        >
-            <InputLabel htmlFor="age-simple">選擇分類</InputLabel>
-            <Select
-                value={newData.category}
-                onChange={handleChange}
-                inputProps={{
-                    id: "category",
-                    name: "category"
-                }}
-            >
-                {category &&
-                    category.map((doc, index) => (
-                        <MenuItem key={index} value={doc.name}>
-                            {doc.name}
-                        </MenuItem>
-                    ))}
-            </Select>
-            <FormHelperText color="error">{errors.category}</FormHelperText>
-        </FormControl>
-    );
-};
-
 const AddList = () => {
     const classes = useStyle();
     const dispatch = useDispatch();
@@ -150,11 +117,13 @@ const AddList = () => {
 
     //if success init data
     useEffect(() => {
-        setNewData({ title: "", cost: "", category: "" });
-        setNewFile({
-            selectedFile: null,
-            fileName: "上傳照片"
-        });
+        if (success) {
+            setNewData({ title: "", cost: "", category: "" });
+            setNewFile({
+                selectedFile: null,
+                fileName: "上傳照片"
+            });
+        }
     }, [success]);
 
     const handleChange = e => {
@@ -170,7 +139,6 @@ const AddList = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(newData);
         dispatch(addMenuAction(newData, newFile.selectedFile));
     };
 
@@ -213,12 +181,15 @@ const AddList = () => {
                             </Grid>
                             <Grid item xs={6}>
                                 <SelectCategory
-                                    newData={newData}
+                                    select={newData.category}
                                     onSelect={handleChange}
                                     errors={errors}
                                 />
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} align="center">
+                                <Typography color="error">
+                                    {errors.addMenu}
+                                </Typography>
                                 <Button
                                     type="submit"
                                     variant="outlined"
