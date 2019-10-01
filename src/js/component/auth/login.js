@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../store/action/authAction";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Paper, TextField, Button } from "@material-ui/core";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, LinearProgress } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -18,7 +18,7 @@ const login = props => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const { auth } = useSelector(state => state.auth);
-    const { errors } = useSelector(state => state.UI);
+    const { errors, loading } = useSelector(state => state.UI);
     const [loginData, setLoginData] = useState("");
     const handleChange = e => {
         setLoginData({ ...loginData, [e.target.id]: e.target.value });
@@ -33,7 +33,7 @@ const login = props => {
             <Container maxWidth="sm" className={classes.root}>
                 <Paper style={{ padding: "10%" }}>
                     <form onSubmit={handleSubmit}>
-                        <Grid container spacing={5}>
+                        <Grid container spacing={3}>
                             <Grid item xs={12} align="center">
                                 <Typography variant="h5" component="h3">
                                     菜單管理系統
@@ -60,7 +60,13 @@ const login = props => {
                                     {errors.login}
                                 </Typography>
                             </Grid>
+
                             <Grid item xs={12}>
+                                <LinearProgress
+                                    hidden={!loading}
+                                    style={{ margin: "5px 0" }}
+                                />
+
                                 <Button
                                     type="submit"
                                     variant="contained"

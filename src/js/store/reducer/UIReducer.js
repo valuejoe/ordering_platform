@@ -4,7 +4,10 @@ import {
     CHANGE_TAB,
     SET_ERROR,
     CLEAR_STATUS,
-    SET_SUCCESS
+    SET_SUCCESS,
+    SELECT_EDITMENU,
+    START_LOADING,
+    STOP_LOADING
 } from "../action/type";
 
 const initState = {
@@ -12,11 +15,22 @@ const initState = {
     shoppingCarOpen: false,
     tabSelectValue: 0,
     errors: "",
-    success: ""
+    success: "",
+    editMenu: ""
 };
 
 const UIReducer = (state = initState, action) => {
     switch (action.type) {
+        case START_LOADING:
+            return {
+                ...state,
+                loading: true
+            };
+        case STOP_LOADING:
+            return {
+                ...state,
+                loading: false
+            };
         case OPEN_SHOPPINGCAR:
             return {
                 ...state,
@@ -47,6 +61,11 @@ const UIReducer = (state = initState, action) => {
             return {
                 ...state,
                 success: action.payload
+            };
+        case SELECT_EDITMENU:
+            return {
+                ...state,
+                editMenu: action.payload
             };
         default:
             return state;

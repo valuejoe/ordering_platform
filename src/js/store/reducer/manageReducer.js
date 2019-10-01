@@ -1,4 +1,4 @@
-import { ADD_CATEGORY, ADD_MENU, GET_CATEGORY, GET_MENU } from "../action/type";
+import { ADD_CATEGORY, ADD_MENU, GET_CATEGORY, GET_MENU,UPDATE_MENU } from "../action/type";
 
 const initState = {
     category: [],
@@ -26,6 +26,17 @@ const manageReducer = (state = initState, action) => {
             return {
                 ...state,
                 product: [...state.product, action.payload]
+            };
+        case UPDATE_MENU:
+            return {
+                ...state,
+                product: state.product.map(doc => {
+                    if (action.payload._id === doc._id) {
+                        return action.payload;
+                    } else {
+                        return doc;
+                    }
+                })
             };
         default:
             return state;

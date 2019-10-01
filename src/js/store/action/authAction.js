@@ -1,21 +1,31 @@
-import { LOGIN, LOGOUT, SET_ERROR, CLEAR_STATUS } from "../action/type";
+import {
+    LOGIN,
+    LOGOUT,
+    SET_ERROR,
+    CLEAR_STATUS,
+    START_LOADING,
+    STOP_LOADING
+} from "../action/type";
 import Axios from "axios";
 import API_PORT from "../../route/APIport";
 
 export const loginAction = (data, history) => {
     return async dispatch => {
         dispatch({ type: CLEAR_STATUS });
+        dispatch({ type: START_LOADING });
         try {
             const login = await Axios.post(`${API_PORT}/api/user/login`, data);
             setAuthorizationHeader(login.data);
             dispatch({ type: LOGIN });
             history.push("/addlist");
+            dispatch({ type: STOP_LOADING });
         } catch (err) {
             console.log(err.response.data);
             dispatch({
                 type: SET_ERROR,
                 payload: { login: "帳號或密碼輸入錯誤" }
             });
+            dispatch({ type: STOP_LOADING });
         }
     };
 };

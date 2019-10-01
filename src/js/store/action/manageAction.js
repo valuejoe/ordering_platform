@@ -7,7 +7,11 @@ import {
     ADD_CATEGORY,
     ADD_MENU,
     GET_CATEGORY,
-    GET_MENU
+    GET_MENU,
+    UPDATE_MENU,
+    SELECT_EDITMENU,
+    START_LOADING,
+    STOP_LOADING
 } from "./type";
 
 export const clearStatusAction = () => {
@@ -43,7 +47,7 @@ export const getMenuAction = () => {
 export const addCategoryAction = data => {
     return async dispatch => {
         dispatch({ type: CLEAR_STATUS });
-        let { errors, isError } = addCategoryValidation(data);
+        let { errors, isError } = CategoryValidation(data);
         if (isError) {
             dispatch({
                 type: SET_ERROR,
@@ -68,7 +72,7 @@ export const addCategoryAction = data => {
 export const addMenuAction = (data, filedata) => {
     return async dispatch => {
         dispatch({ type: CLEAR_STATUS });
-        let { errors, isError } = addMenuValidation(data);
+        let { errors, isError } = MenuValidation(data);
         if (isError) {
             dispatch({ type: SET_ERROR, payload: errors });
         } else {
@@ -97,19 +101,52 @@ export const addMenuAction = (data, filedata) => {
     };
 };
 
-const addMenuValidation = data => {
+//update Menu
+export const updateMenuAction = (data, filedata) => {
+    return async dispatch => {
+        dispatch({ type: START_LOADING });
+        let { errors, isError } = MenuValidation(data);
+        if (isError) {
+            dispatch({ type: SET_ERROR, payload: errors });
+        } else {
+            try {
+                const updateMenu = await Axios.patch(
+                    `${API_PORT}/api/posts/update/menu`,
+                    data
+                );
+                dispatch({ type: UPDATE_MENU, payload: data });
+                if (filedata) {
+                    const imgData = new FormData();
+                    imgData.append("file", filedata, data._id);
+                    const updateImg = await Axios.post(
+                        `${API_PORT}/api/posts/upload`,
+                        imgData
+                    );
+                    window.location.reload();
+                }
+                dispatch({ type: SELECT_EDITMENU, payload: false });
+                dispatch({ type: STOP_LOADING });
+            } catch (err) {
+                console.log(err.response.data);
+                dispatch({ type: STOP_LOADING });
+            }
+        }
+    };
+};
+
+const MenuValidation = data => {
+    console.log(data);
     let errors = {};
     // is empty
     if (data.title.trim() == "") errors.title = "您尚未填寫商品名稱";
-    if (data.cost.trim() == "") errors.cost = "您尚未填寫金額";
     if (data.category.trim() == "") errors.category = "您尚選擇分類";
     //check format
-    if (!parseInt(data.cost, 10)) errors.cost = "只能輸入數字";
+    if (!parseInt(data.cost, 10)) errors.cost = "非有效輸入";
 
     return { errors, isError: Object.keys(errors).length === 0 ? false : true };
 };
 
-const addCategoryValidation = data => {
+const CategoryValidation = data => {
     let errors = {};
     if (data.name.trim() == "") errors.name = "您尚未填寫分類名稱";
     return { errors, isError: Object.keys(errors).length === 0 ? false : true };

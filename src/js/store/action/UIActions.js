@@ -1,7 +1,8 @@
 import {
     OPEN_SHOPPINGCAR,
     CLOSE_SHOPPINGCAR,
-    CHANGE_TAB
+    CHANGE_TAB,
+    SELECT_EDITMENU
 } from "./type";
 
 // Tab value action
@@ -23,3 +24,9 @@ export const closeShoppingCarAction = () => {
         dispatch({ type: CLOSE_SHOPPINGCAR });
     };
 };
+
+export const selectEditMenuAction = (data) => {
+    return dispatch => {
+        dispatch({type: SELECT_EDITMENU, payload: data})
+    }
+}
