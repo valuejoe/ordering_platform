@@ -5,7 +5,7 @@ import {
     SET_ERROR,
     CLEAR_STATUS,
     SET_SUCCESS,
-    SELECT_EDITMENU,
+    SELECT_EDIT,
     START_LOADING,
     STOP_LOADING
 } from "../action/type";
@@ -16,7 +16,7 @@ const initState = {
     tabSelectValue: 0,
     errors: "",
     success: "",
-    editMenu: ""
+    edit: ""
 };
 
 const UIReducer = (state = initState, action) => {
@@ -62,10 +62,10 @@ const UIReducer = (state = initState, action) => {
                 ...state,
                 success: action.payload
             };
-        case SELECT_EDITMENU:
+        case SELECT_EDIT:
             return {
                 ...state,
-                editMenu: action.payload
+                edit: action.payload
             };
         default:
             return state;

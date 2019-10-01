@@ -9,9 +9,10 @@ import {
     GET_CATEGORY,
     GET_MENU,
     UPDATE_MENU,
-    SELECT_EDITMENU,
+    SELECT_EDIT,
     START_LOADING,
-    STOP_LOADING
+    STOP_LOADING,
+    UPDATE_CATEGORY
 } from "./type";
 
 export const clearStatusAction = () => {
@@ -36,7 +37,7 @@ export const getCategoryAction = () => {
 export const getMenuAction = () => {
     return async dispatch => {
         try {
-            const getMenu = await Axios.get(`${API_PORT}/api/posts/menu`);
+            let getMenu = await Axios.get(`${API_PORT}/api/posts/menu`);
             dispatch({ type: GET_MENU, payload: getMenu.data });
         } catch (err) {
             console.log(err);
@@ -71,6 +72,7 @@ export const addCategoryAction = data => {
 
 export const addMenuAction = (data, filedata) => {
     return async dispatch => {
+        console.log(data);
         dispatch({ type: CLEAR_STATUS });
         let { errors, isError } = MenuValidation(data);
         if (isError) {
@@ -124,12 +126,24 @@ export const updateMenuAction = (data, filedata) => {
                     );
                     window.location.reload();
                 }
-                dispatch({ type: SELECT_EDITMENU, payload: false });
+                dispatch({ type: SELECT_EDIT, payload: false });
                 dispatch({ type: STOP_LOADING });
             } catch (err) {
                 console.log(err.response.data);
                 dispatch({ type: STOP_LOADING });
             }
+        }
+    };
+};
+
+export const updateCategoryAction = data => {
+    return async dispatch => {
+        const { errors, isError } = CategoryValidation(data);
+        if (isError) {
+            dispatch({ type: SET_ERROR, payload: errors });
+        } else {
+            dispatch({ type: UPDATE_CATEGORY, payload: data });
+            dispatch({ type: SELECT_EDIT, payload: false });
         }
     };
 };

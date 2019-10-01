@@ -2,7 +2,7 @@ import {
     OPEN_SHOPPINGCAR,
     CLOSE_SHOPPINGCAR,
     CHANGE_TAB,
-    SELECT_EDITMENU
+    SELECT_EDIT
 } from "./type";
 
 // Tab value action
@@ -25,8 +25,8 @@ export const closeShoppingCarAction = () => {
     };
 };
 
-export const selectEditMenuAction = (data) => {
+export const selectEditAction = data => {
     return dispatch => {
-        dispatch({type: SELECT_EDITMENU, payload: data})
-    }
-}
+        dispatch({ type: SELECT_EDIT, payload: data });
+    };
+};

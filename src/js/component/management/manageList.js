@@ -9,44 +9,16 @@ import {
     Grid,
     IconButton,
     Fade,
-    Collapse
+    Button
 } from "@material-ui/core";
 import SelectCategory from "./selectCategory";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import EditMenu from "./EditMenu";
-import { selectEditMenuAction } from "../../store/action/UIActions";
-import transitions from "@material-ui/core/styles/transitions";
+import { selectEditAction } from "../../store/action/UIActions";
+import CategoryList from "./CategoryList";
 
-const ManageList = () => {
-    const { category, product } = useSelector(state => state.manage);
-    const [select, setSelect] = useState("");
-
-    useEffect(() => {
-        if (select === "") setSelect(category[0] ? category[0].name : "");
-    }, [category]);
-    const handleSelect = e => {
-        setSelect(e.target.value);
-    };
-    return (
-        <div>
-            <Container maxWidth="sm">
-                <SelectCategory
-                    select={select}
-                    errors={false}
-                    onSelect={handleSelect}
-                />
-                <TableTitle />
-                {product &&
-                    product
-                        .filter(doc => doc.category === select)
-                        .map(doc => <TableItem key={doc._id} menuData={doc} />)}
-            </Container>
-        </div>
-    );
-};
-
-const TableTitle = () => {
+const MenuTableTitle = () => {
     return (
         <Paper style={{ padding: "1% 2%", marginBottom: "5px" }}>
             <Grid container alignItems="center" spacing={1}>
@@ -66,18 +38,21 @@ const TableTitle = () => {
         </Paper>
     );
 };
-const TableItem = props => {
+const MenuTableItem = props => {
     const { menuData } = props;
     const dispatch = useDispatch();
-    const { editMenu } = useSelector(state => state.UI);
+    const { edit } = useSelector(state => state.UI);
+    let { category } = useSelector(state => state.manage);
+    console.log(menuData);
+    category = category.find(doc => doc._id === menuData.category).name;
     const handleClickEdit = e => {
-        dispatch(selectEditMenuAction(e));
+        dispatch(selectEditAction(e));
     };
     return (
         <React.Fragment>
             <Fade in={true} timeout={500}>
                 <Paper style={{ padding: "2%", marginBottom: "5px" }}>
-                    {editMenu === menuData._id ? (
+                    {edit === menuData._id ? (
                         <EditMenu menuData={menuData} close={handleClickEdit} />
                     ) : (
                         <Grid
@@ -103,7 +78,7 @@ const TableItem = props => {
                                 <Typography>{menuData.cost}</Typography>
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography>{menuData.category}</Typography>
+                                <Typography>{category}</Typography>
                             </Grid>
                             <Grid item xs={3}>
                                 <IconButton
@@ -123,6 +98,50 @@ const TableItem = props => {
                 </Paper>
             </Fade>
         </React.Fragment>
+    );
+};
+
+const ManageList = () => {
+    const { category, product } = useSelector(state => state.manage);
+    const [select, setSelect] = useState("");
+    const [edit, setEdit] = useState(false);
+    useEffect(() => {
+        console.log(category);
+        if (select === "") setSelect(category[0] ? category[0]._id : "");
+    }, [category]);
+    const handleSelect = e => {
+        setSelect(e.target.value);
+    };
+    const handleEditClick = e => {
+        setEdit(e);
+    };
+    return (
+        <div>
+            <Container maxWidth="sm">
+                <Grid container justify="flex-start" alignItems="center">
+                    <SelectCategory
+                        select={select}
+                        errors={false}
+                        onSelect={handleSelect}
+                    />
+                    <Button
+                        variant="outlined"
+                        style={{ marginLeft: "10px" }}
+                        onClick={() => handleEditClick(true)}
+                    >
+                        編輯分類
+                    </Button>
+                </Grid>
+                <CategoryList />
+                <MenuTableTitle />
+                {product &&
+                    product
+                        .filter(doc => doc.category === select)
+                        .map(doc => (
+                            <MenuTableItem key={doc._id} menuData={doc} />
+                        ))}
+            </Container>
+        </div>
     );
 };
 

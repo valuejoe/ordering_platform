@@ -16,7 +16,7 @@ export const CHANGE_TAB = "CHANGE_TAB";
 export const SET_ERROR = "SET_ERROR";
 export const CLEAR_STATUS = "CLEAR_STATUS";
 export const SET_SUCCESS = "SET_SUCCESS";
-export const SELECT_EDITMENU = "SELECT_EDITMENU";
+export const SELECT_EDIT = "SELECT_EDIT";
 
 //auth reducer
 export const LOGIN = "LOGIN";
@@ -28,3 +28,4 @@ export const ADD_MENU = "ADD_MENU";
 export const GET_CATEGORY = "GET_CATEGORY";
 export const GET_MENU = "GET_MENU";
 export const UPDATE_MENU = "UPDATE_MENU";
+export const UPDATE_CATEGORY = "UPDATE_CATEGORY";

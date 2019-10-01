@@ -25,7 +25,7 @@ const SelectCategory = props => {
             >
                 {category &&
                     category.map((doc, index) => (
-                        <MenuItem key={index} value={doc.name}>
+                        <MenuItem key={index} value={doc._id}>
                             {doc.name}
                         </MenuItem>
                     ))}
