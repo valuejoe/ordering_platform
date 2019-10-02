@@ -11,7 +11,7 @@ const SelectCategory = props => {
     };
     return (
         <FormControl
-            style={{ minWidth: "150px" }}
+            style={{ width: "100%" }}
             error={errors.category ? true : false}
         >
             <InputLabel htmlFor="age-simple">選擇分類</InputLabel>

@@ -29,3 +29,5 @@ export const GET_CATEGORY = "GET_CATEGORY";
 export const GET_MENU = "GET_MENU";
 export const UPDATE_MENU = "UPDATE_MENU";
 export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
+export const DELETE_MENU = "DELETE_MENU";
+export const DELETE_CATEGORY = "DELETE_CATEGORY";

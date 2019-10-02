@@ -4,7 +4,9 @@ import {
     GET_CATEGORY,
     GET_MENU,
     UPDATE_MENU,
-    UPDATE_CATEGORY
+    UPDATE_CATEGORY,
+    DELETE_MENU,
+    DELETE_CATEGORY
 } from "../action/type";
 import { finished } from "stream";
 
@@ -56,6 +58,20 @@ const manageReducer = (state = initState, action) => {
                         return doc;
                     }
                 })
+            };
+        case DELETE_MENU:
+            return {
+                ...state,
+                product: state.product.filter(
+                    doc => doc._id !== action.payload._id
+                )
+            };
+        case DELETE_CATEGORY:
+            return {
+                ...state,
+                category: state.category.filter(
+                    doc => doc._id !== action.payload._id
+                )
             };
         default:
             return state;

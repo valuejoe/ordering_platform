@@ -12,7 +12,9 @@ import {
     SELECT_EDIT,
     START_LOADING,
     STOP_LOADING,
-    UPDATE_CATEGORY
+    UPDATE_CATEGORY,
+    DELETE_MENU,
+    DELETE_CATEGORY
 } from "./type";
 
 export const clearStatusAction = () => {
@@ -136,14 +138,54 @@ export const updateMenuAction = (data, filedata) => {
     };
 };
 
+// update category
 export const updateCategoryAction = data => {
     return async dispatch => {
         const { errors, isError } = CategoryValidation(data);
         if (isError) {
             dispatch({ type: SET_ERROR, payload: errors });
         } else {
-            dispatch({ type: UPDATE_CATEGORY, payload: data });
-            dispatch({ type: SELECT_EDIT, payload: false });
+            try {
+                const updateCategory = await Axios.patch(
+                    `${API_PORT}/api/posts/update/category`,
+                    data
+                );
+                dispatch({ type: UPDATE_CATEGORY, payload: data });
+                dispatch({ type: SELECT_EDIT, payload: false });
+            } catch (err) {
+                console.log(err.response.data);
+            }
+        }
+    };
+};
+
+//delete menu
+export const deleteMenuAction = data => {
+    return async dispatch => {
+        try {
+            const deleteMenu = await Axios.delete(
+                `${API_PORT}/api/posts/delete/menu`,
+                { data: data }
+            );
+            dispatch({ type: DELETE_MENU, payload: data });
+        } catch (err) {
+            console.log(err.response.data);
+        }
+    };
+};
+
+//delete category
+export const deleteCategoryAction = data => {
+    return async dispatch => {
+        try {
+            const deleteCategory = await Axios.delete(
+                `${API_PORT}/api/posts/delete/category`,
+                { data: data }
+            );
+            dispatch({ type: DELETE_CATEGORY, payload: data });
+        } catch (err) {
+            console.log(err.response.data);
+            dispatch({ type: SET_ERROR, payload: { deleteCategory: true } });
         }
     };
 };

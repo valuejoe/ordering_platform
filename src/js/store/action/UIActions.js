@@ -30,3 +30,9 @@ export const selectEditAction = data => {
         dispatch({ type: SELECT_EDIT, payload: data });
     };
 };
+
+export const clearStatusAction = () => {
+    return dispatch => {
+        dispatch({ type: CLEAR_STATUS });
+    };
+};

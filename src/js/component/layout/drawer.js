@@ -65,7 +65,7 @@ function ResponsiveDrawer(props) {
                     </ListItemIcon>
                     <ListItemText primary="新增菜單" />
                 </ListItem>
-                <ListItem button component={Link} to="/manageList">
+                <ListItem button component={Link} to="/listmanage">
                     <ListItemIcon>
                         <ListIcon />
                     </ListItemIcon>

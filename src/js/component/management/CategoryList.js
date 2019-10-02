@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     Paper,
@@ -6,14 +6,21 @@ import {
     Typography,
     Fade,
     IconButton,
-    TextField
+    TextField,
+    Tooltip,
+    Snackbar,
+    Box
 } from "@material-ui/core";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
 import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
+import ErrorRoundedIcon from "@material-ui/icons/ErrorRounded";
 import { selectEditAction } from "../../store/action/UIActions";
-import { updateCategoryAction } from "../../store/action/manageAction";
+import {
+    updateCategoryAction,
+    deleteCategoryAction
+} from "../../store/action/manageAction";
 
 const TableTitle = () => {
     return (
@@ -34,8 +41,12 @@ const TableItem = props => {
     const { categoryData, index } = props;
     const dispatch = useDispatch();
     const { edit } = useSelector(state => state.UI);
+
     const handleClickEdit = e => {
         dispatch(selectEditAction(e));
+    };
+    const handleDeleteClick = () => {
+        dispatch(deleteCategoryAction(categoryData));
     };
     return (
         <React.Fragment>
@@ -69,9 +80,14 @@ const TableItem = props => {
                                 >
                                     <EditOutlinedIcon />
                                 </IconButton>
-                                <IconButton size="small">
-                                    <DeleteOutlinedIcon />
-                                </IconButton>
+                                <Tooltip title="此分類非為空" placement="right">
+                                    <IconButton
+                                        size="small"
+                                        onClick={handleDeleteClick}
+                                    >
+                                        <DeleteOutlinedIcon />
+                                    </IconButton>
+                                </Tooltip>
                             </Grid>
                         </Grid>
                     )}
@@ -123,8 +139,34 @@ const CategoryEdit = props => {
 
 function CategoryList() {
     const { category } = useSelector(state => state.manage);
+    const { errors } = useSelector(state => state.UI);
+
+    //handle error
+    const [open, setOpen] = React.useState(false);
+    const handleErrorClose = () => {
+        setOpen(false);
+    };
+
+    useEffect(() => {
+        if (errors.deleteCategory) setOpen(true);
+        return () => {
+            console.log("hi");
+        };
+    }, [errors]);
+
     return (
         <div>
+            <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                open={open}
+                onClose={handleErrorClose}
+                message={
+                    <span style={{ display: "flex", alignItems: "center" }}>
+                        <ErrorRoundedIcon />
+                        還有菜單在裡面，無法刪除此分類
+                    </span>
+                }
+            />
             <TableTitle />
             {category &&
                 category.map((doc, index) => (

@@ -187,8 +187,16 @@ const AddList = () => {
                                 />
                             </Grid>
                             <Grid item xs={12} align="center">
-                                <Typography color="error">
+                                <Typography
+                                    hidden={!errors.addMenu}
+                                    color="error"
+                                >
                                     {errors.addMenu}
+                                </Typography>
+                                <Typography hidden={!success.addMenu}>
+                                    <CheckCircleRoundedIcon
+                                        style={{ color: "green" }}
+                                    />
                                 </Typography>
                                 <Button
                                     type="submit"

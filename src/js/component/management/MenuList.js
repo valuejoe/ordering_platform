@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    Container,
-    Paper,
-    TextField,
-    CardMedia,
-    Typography,
-    Grid,
-    IconButton,
-    Fade,
-    Button
-} from "@material-ui/core";
-import SelectCategory from "./selectCategory";
+import { Paper, CardMedia, Typography, Grid } from "@material-ui/core";
+import { Fade, IconButton } from "@material-ui/core";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import EditMenu from "./EditMenu";
 import { selectEditAction } from "../../store/action/UIActions";
-import CategoryList from "./CategoryList";
+import { deleteMenuAction } from "../../store/action/manageAction";
 
 const MenuTableTitle = () => {
     return (
@@ -38,16 +28,22 @@ const MenuTableTitle = () => {
         </Paper>
     );
 };
+
 const MenuTableItem = props => {
     const { menuData } = props;
     const dispatch = useDispatch();
     const { edit } = useSelector(state => state.UI);
     let { category } = useSelector(state => state.manage);
-    console.log(menuData);
     category = category.find(doc => doc._id === menuData.category).name;
+
     const handleClickEdit = e => {
         dispatch(selectEditAction(e));
     };
+
+    const handleClickDelete = e => {
+        dispatch(deleteMenuAction(menuData));
+    };
+
     return (
         <React.Fragment>
             <Fade in={true} timeout={500}>
@@ -89,7 +85,10 @@ const MenuTableItem = props => {
                                 >
                                     <EditOutlinedIcon />
                                 </IconButton>
-                                <IconButton size="small">
+                                <IconButton
+                                    size="small"
+                                    onClick={handleClickDelete}
+                                >
                                     <DeleteOutlinedIcon />
                                 </IconButton>
                             </Grid>
@@ -101,48 +100,18 @@ const MenuTableItem = props => {
     );
 };
 
-const ManageList = () => {
-    const { category, product } = useSelector(state => state.manage);
-    const [select, setSelect] = useState("");
-    const [edit, setEdit] = useState(false);
-    useEffect(() => {
-        console.log(category);
-        if (select === "") setSelect(category[0] ? category[0]._id : "");
-    }, [category]);
-    const handleSelect = e => {
-        setSelect(e.target.value);
-    };
-    const handleEditClick = e => {
-        setEdit(e);
-    };
-    return (
-        <div>
-            <Container maxWidth="sm">
-                <Grid container justify="flex-start" alignItems="center">
-                    <SelectCategory
-                        select={select}
-                        errors={false}
-                        onSelect={handleSelect}
-                    />
-                    <Button
-                        variant="outlined"
-                        style={{ marginLeft: "10px" }}
-                        onClick={() => handleEditClick(true)}
-                    >
-                        編輯分類
-                    </Button>
-                </Grid>
-                <CategoryList />
-                <MenuTableTitle />
-                {product &&
-                    product
-                        .filter(doc => doc.category === select)
-                        .map(doc => (
-                            <MenuTableItem key={doc._id} menuData={doc} />
-                        ))}
-            </Container>
-        </div>
-    );
-};
+function MenuList({ select }) {
+    const { product } = useSelector(state => state.manage);
 
-export default ManageList;
+    return (
+        <React.Fragment>
+            <MenuTableTitle />
+            {product &&
+                product
+                    .filter(doc => doc.category === select)
+                    .map(doc => <MenuTableItem key={doc._id} menuData={doc} />)}
+        </React.Fragment>
+    );
+}
+
+export default MenuList;
