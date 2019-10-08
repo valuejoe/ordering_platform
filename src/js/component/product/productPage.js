@@ -6,7 +6,6 @@ import ProductList from "./productList";
 const TabPanel = props => {
     const { value, index, category } = props;
     const { product } = useSelector(state => state.data);
-
     return (
         <Fade in={value === index}>
             <Container hidden={value !== index}>
@@ -17,11 +16,11 @@ const TabPanel = props => {
                     style={{ marginTop: "3%" }}
                 >
                     {product &&
-                        product.map(doc => {
+                        product.map((doc, index) => {
                             if (doc.category === category) {
                                 return (
                                     <Grid
-                                        key={doc.id}
+                                        key={index}
                                         item
                                         xs={12}
                                         sm={4}
@@ -44,12 +43,12 @@ const ProductPage = () => {
     return (
         <React.Fragment>
             {category &&
-                category.map(doc => (
+                category.map((doc, index) => (
                     <TabPanel
-                        key={doc.id}
+                        key={index}
                         value={tabSelectValue}
-                        index={doc.id}
-                        category={doc.name}
+                        index={index}
+                        category={doc._id}
                     />
                 ))}
         </React.Fragment>

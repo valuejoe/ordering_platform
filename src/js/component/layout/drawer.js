@@ -59,6 +59,18 @@ function ResponsiveDrawer(props) {
             <div className={classes.toolbar} />
             <Divider />
             <List>
+                <ListItem button component={Link} to="/order">
+                    <ListItemIcon>
+                        <AddBoxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="訂單清單" />
+                </ListItem>
+                <ListItem button component={Link} to="/completed">
+                    <ListItemIcon>
+                        <AddBoxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="訂單紀錄" />
+                </ListItem>
                 <ListItem button component={Link} to="/addList">
                     <ListItemIcon>
                         <AddBoxIcon />

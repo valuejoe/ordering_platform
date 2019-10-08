@@ -5,7 +5,7 @@ import { FormHelperText, MenuItem } from "@material-ui/core";
 
 const SelectCategory = props => {
     const { category } = useSelector(state => state.manage);
-    const { select, errors } = props;
+    const { select, errors, disable } = props;
     const handleChange = e => {
         props.onSelect(e);
     };
@@ -13,6 +13,7 @@ const SelectCategory = props => {
         <FormControl
             style={{ width: "100%" }}
             error={errors.category ? true : false}
+            disabled={disable}
         >
             <InputLabel htmlFor="age-simple">選擇分類</InputLabel>
             <Select

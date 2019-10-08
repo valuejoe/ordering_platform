@@ -9,7 +9,7 @@ import {
 } from "../../store/action/dataActions";
 import ProductDialog from "../product/productDialog";
 
-const OrderContent = props => {
+const TableItem = props => {
     const { data } = props;
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
@@ -53,4 +53,4 @@ const OrderContent = props => {
     );
 };
 
-export default OrderContent;
+export default TableItem;

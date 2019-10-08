@@ -12,15 +12,7 @@ import {
     orderCostSumAction,
     submitOrderAction
 } from "../../store/action/dataActions";
-import OrderContent from "./orderContent";
-
-const sum = data => {
-    let sum = 0;
-    data.map(data => {
-        sum = data.cost + sum;
-    });
-    return sum;
-};
+import TableItem from "./TableItem";
 
 const Header = () => {
     return (
@@ -43,7 +35,7 @@ const Body = ({ order }) => {
             {order &&
                 order.map((data, index) => (
                     <TableRow key={index}>
-                        <OrderContent data={data} />
+                        <TableItem data={data} />
                     </TableRow>
                 ))}
         </React.Fragment>
@@ -89,12 +81,12 @@ const ShoppingCar = props => {
     };
 
     const handleSubmitClick = () => {
-        dispatch(submitOrderAction());
+        dispatch(submitOrderAction(order));
     };
     return (
         <div>
             {!shoppingCarOpen && <Redirect to="/" />}
-            <Container maxWidth="sm" style={{ padding: "8% 2%" }}>
+            <Container maxWidth="sm" style={{ padding: "5% 2%" }}>
                 <Paper>
                     <Grid container>
                         <Grid item xs={12}>

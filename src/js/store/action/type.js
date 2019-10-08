@@ -4,8 +4,9 @@ export const DELETE_ORDER = "DELETE_ORDER";
 export const UPDATE_ORDER = "UPDATE_ORDER";
 export const SELECT_ORDER = "SELECT_ORDER";
 export const SUM_ORDER = "SUM_ORDER";
-export const INIT_ORDER = "INIT_ORDER";
 export const UPDATE_ORDER_COUNT = "UPDATE_ORDER_COUNT";
+export const FETCH_MENU = "FETCH_MENU";
+export const FETCH_CATEGORY = "FETCH_CATEGORY";
 
 //UI reducer
 export const START_LOADING = "START_LOADING";
@@ -31,3 +32,6 @@ export const UPDATE_MENU = "UPDATE_MENU";
 export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
 export const DELETE_MENU = "DELETE_MENU";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
+export const GET_ORDER = "GET_ORDER";
+export const GET_COMPLETED = "GET_COMPLETED";
+export const COMPLETED_ORDER = "COMPLETED_ORDER";

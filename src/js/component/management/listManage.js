@@ -31,6 +31,7 @@ const ManageList = () => {
                             select={select}
                             errors={false}
                             onSelect={handleSelect}
+                            disable={open}
                         />
                     </Grid>
                     <Button
@@ -41,7 +42,9 @@ const ManageList = () => {
                         {open ? "菜單列表" : "分類列表"}
                     </Button>
                 </Grid>
-                {open ? <CategoryList /> : <MenuList select={select} />}
+                <div style={{ maxHeight: "80vh", overflow: "auto" }}>
+                    {open ? <CategoryList /> : <MenuList select={select} />}
+                </div>
             </Container>
         </div>
     );

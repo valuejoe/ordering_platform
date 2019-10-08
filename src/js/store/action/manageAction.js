@@ -14,8 +14,26 @@ import {
     STOP_LOADING,
     UPDATE_CATEGORY,
     DELETE_MENU,
-    DELETE_CATEGORY
+    DELETE_CATEGORY,
+    GET_ORDER,
+    COMPLETED_ORDER,
+    GET_COMPLETED
 } from "./type";
+
+export const completedAction = data => {
+    return async dispatch => {
+        try {
+            const completedOrder = await Axios.post(
+                `${API_PORT}/api/order/completed`,
+                data
+            );
+            console.log(completedOrder);
+            dispatch({ type: COMPLETED_ORDER, payload: completedOrder.data });
+        } catch (err) {
+            console.log(err.response.data);
+        }
+    };
+};
 
 export const clearStatusAction = () => {
     return dispatch => {
@@ -23,6 +41,29 @@ export const clearStatusAction = () => {
     };
 };
 
+export const getOrderAction = () => {
+    return async dispatch => {
+        try {
+            const getOrder = await Axios.get(`${API_PORT}/api/order`);
+            dispatch({ type: GET_ORDER, payload: getOrder.data });
+        } catch (err) {
+            conslog(err.response.data);
+        }
+    };
+};
+
+export const getCompletedAction = () => {
+    return async dispatch => {
+        try {
+            const getCompleted = await Axios.get(
+                `${API_PORT}/api/order/completed`
+            );
+            dispatch({ type: GET_COMPLETED, payload: getCompleted.data });
+        } catch (err) {
+            console.log(err.response.data);
+        }
+    };
+};
 export const getCategoryAction = () => {
     return async dispatch => {
         try {

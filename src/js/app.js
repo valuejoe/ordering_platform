@@ -8,6 +8,8 @@ import AddList from "./component/management/addList";
 import AuthManagement from "./component/auth/authManagement";
 import ShopRoute from "./route/shopRoute";
 import ManageRoute from "./route/manageRoute";
+import OrderList from "./component/management/order/orderList";
+import CompletedList from "./component/management/completed/completedList";
 const App = () => {
     return (
         <HashRouter>
@@ -15,6 +17,8 @@ const App = () => {
                 <Route path="/login" component={Login} />
                 <ShopRoute exact path="/" component={ProductPage} />
                 <ShopRoute path="/shoppingCar" component={ShoppingCar} />
+                <ManageRoute path="/order" component={OrderList} />
+                <ManageRoute path="/completed" component={CompletedList} />
                 <ManageRoute path="/listmanage" component={ListManage} />
                 <ManageRoute path="/addList" component={AddList} />
                 <ManageRoute

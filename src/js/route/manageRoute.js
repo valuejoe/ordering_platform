@@ -5,7 +5,9 @@ import Drawer from "../component/layout/drawer";
 import {
     getCategoryAction,
     getMenuAction,
-    clearStatusAction
+    clearStatusAction,
+    getOrderAction,
+    getCompletedAction
 } from "../store/action/manageAction";
 
 const ManageRoute = ({ component: Component, ...rest }) => {
@@ -16,6 +18,8 @@ const ManageRoute = ({ component: Component, ...rest }) => {
         dispatch(getMenuAction());
     }, []);
     useEffect(() => {
+        if (rest.path === "/order") dispatch(getOrderAction());
+        if (rest.path === "/completed") dispatch(getCompletedAction());
         dispatch(clearStatusAction());
     }, [rest]);
     return (

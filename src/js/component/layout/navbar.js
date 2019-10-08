@@ -58,8 +58,8 @@ const Navbar = props => {
                             className={classes.title}
                         >
                             {category &&
-                                category.map(doc => (
-                                    <Tab label={doc.name} key={doc.id} />
+                                category.map((doc, index) => (
+                                    <Tab label={doc.name} key={index} />
                                 ))}
                         </Tabs>
                         <Button

@@ -18,7 +18,7 @@ function ProductDialog(props) {
     const { onClose, open, id, count } = props;
     const { product, order } = useSelector(state => state.data);
 
-    const singleProduct = product.find(doc => doc.id === id);
+    const singleProduct = product.find(doc => doc._id === id);
 
     const cost = singleProduct.cost;
     const title = singleProduct.title;
