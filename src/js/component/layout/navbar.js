@@ -1,15 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    AppBar,
-    Toolbar,
-    Tabs,
-    Tab,
-    Button,
-    Badge,
-    Typography
-} from "@material-ui/core";
+import { AppBar, Toolbar, Tabs, Tab } from "@material-ui/core";
+import { Button, Badge, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ShoppingCartDialog from "../shoppingCar/shoppingCarDialog";
 import {

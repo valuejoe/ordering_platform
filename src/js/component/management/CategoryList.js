@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    Paper,
-    Grid,
-    Typography,
-    Fade,
-    IconButton,
-    TextField,
-    Tooltip,
-    Snackbar,
-    Box
-} from "@material-ui/core";
+import { Paper, Grid, Typography, Fade } from "@material-ui/core";
+import { IconButton, TextField, Tooltip, Snackbar } from "@material-ui/core";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
