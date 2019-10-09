@@ -29,7 +29,7 @@ const login = props => {
     };
     return (
         <div>
-            {auth && <Redirect to="/addlist" />}
+            {auth && <Redirect to="/order" />}
             <Container maxWidth="sm" className={classes.root}>
                 <Paper style={{ padding: "10%" }}>
                     <form onSubmit={handleSubmit}>

@@ -46,12 +46,18 @@ const CompletedTable = props => {
                                             <Typography variant="body2">
                                                 {new Date(
                                                     doc.completedAt
-                                                ).toLocaleTimeString()}
+                                                ).toLocaleDateString()}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={3}>
                                             <Typography variant="body2">
-                                                份數：{doc.countSum}
+                                                {new Date(
+                                                    doc.completedAt
+                                                ).getHours()}
+                                                :
+                                                {new Date(
+                                                    doc.completedAt
+                                                ).getMinutes()}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={3}>
