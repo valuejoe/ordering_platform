@@ -43,7 +43,7 @@ export const submitOrderAction = data => {
         const order = { order: data };
         try {
             const orderSubmit = await Axios.post(
-                `${API_PORT}/api/order/addOrder`,
+                `${API_PORT}/api/order`,
                 order
             );
             window.location.reload();

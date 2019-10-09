@@ -100,7 +100,7 @@ export const addCategoryAction = data => {
         } else {
             try {
                 const addCategory = await Axios.post(
-                    `${API_PORT}/api/posts/add/category`,
+                    `${API_PORT}/api/posts/category`,
                     data
                 );
                 dispatch({ type: ADD_CATEGORY, payload: addCategory.data });
@@ -123,7 +123,7 @@ export const addMenuAction = (data, filedata) => {
         } else {
             try {
                 const addMenu = await Axios.post(
-                    `${API_PORT}/api/posts/add/menu`,
+                    `${API_PORT}/api/posts/menu`,
                     data
                 );
                 dispatch({ type: ADD_MENU, payload: addMenu.data });
@@ -131,9 +131,8 @@ export const addMenuAction = (data, filedata) => {
                 if (filedata) {
                     const imgData = new FormData();
                     imgData.append("file", filedata, addMenu.data._id);
-                    console.log(filedata);
                     const addFile = await Axios.post(
-                        `${API_PORT}/api/posts/upload`,
+                        `${API_PORT}/api/posts/img`,
                         imgData
                     );
                 }
@@ -156,7 +155,7 @@ export const updateMenuAction = (data, filedata) => {
         } else {
             try {
                 const updateMenu = await Axios.patch(
-                    `${API_PORT}/api/posts/update/menu`,
+                    `${API_PORT}/api/posts/menu`,
                     data
                 );
                 dispatch({ type: UPDATE_MENU, payload: data });
@@ -164,7 +163,7 @@ export const updateMenuAction = (data, filedata) => {
                     const imgData = new FormData();
                     imgData.append("file", filedata, data._id);
                     const updateImg = await Axios.post(
-                        `${API_PORT}/api/posts/upload`,
+                        `${API_PORT}/api/posts/img`,
                         imgData
                     );
                     window.location.reload();
@@ -188,7 +187,7 @@ export const updateCategoryAction = data => {
         } else {
             try {
                 const updateCategory = await Axios.patch(
-                    `${API_PORT}/api/posts/update/category`,
+                    `${API_PORT}/api/posts/category`,
                     data
                 );
                 dispatch({ type: UPDATE_CATEGORY, payload: data });
@@ -205,10 +204,14 @@ export const deleteMenuAction = data => {
     return async dispatch => {
         try {
             const deleteMenu = await Axios.delete(
-                `${API_PORT}/api/posts/delete/menu`,
+                `${API_PORT}/api/posts/menu`,
                 { data: data }
             );
             dispatch({ type: DELETE_MENU, payload: data });
+
+            const deleteImg = await Axios.delete(`${API_PORT}/api/posts/img`, {
+                data: data
+            });
         } catch (err) {
             console.log(err.response.data);
         }
@@ -220,7 +223,7 @@ export const deleteCategoryAction = data => {
     return async dispatch => {
         try {
             const deleteCategory = await Axios.delete(
-                `${API_PORT}/api/posts/delete/category`,
+                `${API_PORT}/api/posts/category`,
                 { data: data }
             );
             dispatch({ type: DELETE_CATEGORY, payload: data });
