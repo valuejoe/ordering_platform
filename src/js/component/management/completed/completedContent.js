@@ -4,7 +4,7 @@ import { TableCell, TableHead, TableRow, Button } from "@material-ui/core";
 
 const Artical = ({ select }) => {
     return (
-        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+        <div style={{ maxHeight: "53vh", overflow: "auto" }}>
             <Table stickyHeader>
                 <TableHead>
                     <TableRow>

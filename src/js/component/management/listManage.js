@@ -42,7 +42,7 @@ const ManageList = () => {
                         {open ? "菜單列表" : "分類列表"}
                     </Button>
                 </Grid>
-                <div style={{ maxHeight: "80vh", overflow: "auto" }}>
+                <div style={{ maxHeight: "70vh", overflow: "auto" }}>
                     {open ? <CategoryList /> : <MenuList select={select} />}
                 </div>
             </Container>

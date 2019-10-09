@@ -22,6 +22,20 @@ if (token) {
 }
 
 const THEME = createMuiTheme({
+    palette: {
+        primary: {
+            light: "#7aafb5",
+            main: "#599ba3",
+            dark: "#3e6c72",
+            contrastText: "#fafafa"
+        },
+        secondary: {
+            light: "#ffc1e3",
+            main: "#f48fb1",
+            dark: "#bf5f82",
+            contrastText: "#212121"
+        }
+    },
     typography: {
         fontFamily: '"Noto Sans TC", sans-serif',
         fontSize: 14,

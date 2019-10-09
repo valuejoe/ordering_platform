@@ -18,9 +18,8 @@ const CompletedTable = props => {
             {completed.length !== 0 ? (
                 completed.map((doc, index) => {
                     return (
-                        <Fade in={true} timeout={500}>
+                        <Fade in={true} timeout={500} key={index}>
                             <ButtonBase
-                                key={index}
                                 style={{
                                     width: "100%",
                                     marginBottom: "10px"

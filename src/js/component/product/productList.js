@@ -7,6 +7,7 @@ import {
     deleteOrderAction,
     addOrderAction
 } from "../../store/action/dataActions";
+import API_PORT from "../../route/APIport";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -56,7 +57,7 @@ export default function ProductList(props) {
                 style={
                     product.select
                         ? {
-                              backgroundColor: "#6eabe7"
+                              backgroundColor: "#7aafb5"
                           }
                         : {
                               backgroundColor: "white"
@@ -67,7 +68,7 @@ export default function ProductList(props) {
                     <CardMedia
                         component="img"
                         alt={product.title}
-                        image={`http://localhost:3030/public/${product._id}.jpg`}
+                        image={`${API_PORT}/public/${product._id}.jpg`}
                         title={product.title}
                         className={classes.image}
                     />
@@ -78,12 +79,11 @@ export default function ProductList(props) {
                             {product.title}
                         </Typography>
                     </Grid>
-                    <Grid item></Grid>
-                    <Grid item></Grid>
-
-                    <Typography component="p">
-                        每份 {product.cost} 元
-                    </Typography>
+                    <Grid item xs={12}>
+                        <Typography component="p">
+                            每份 {product.cost} 元
+                        </Typography>
+                    </Grid>
                 </Grid>
                 <Grid item xs={3} sm={12} style={{ display: "flex" }}>
                     {product.select ? (

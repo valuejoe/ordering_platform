@@ -17,7 +17,7 @@ export const loginAction = (data, history) => {
             const login = await Axios.post(`${API_PORT}/api/user/login`, data);
             setAuthorizationHeader(login.data);
             dispatch({ type: LOGIN });
-            history.push("/addlist");
+            history.push("/order");
             dispatch({ type: STOP_LOADING });
         } catch (err) {
             console.log(err.response.data);

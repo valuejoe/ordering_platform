@@ -14,7 +14,6 @@ function TableList({ TableChildren, ContentChildren }) {
     };
     const handleChange = (e, newValue) => {
         e.preventDefault();
-        console.log(e);
         setValue(newValue);
     };
     const handleChangeIndex = e => {
@@ -57,7 +56,7 @@ function TableList({ TableChildren, ContentChildren }) {
                         style={{ flexGrow: 1, top: "auto", bottom: 0 }}
                     >
                         <Tabs
-                            indicatorColor="primary"
+                            indicatorColor="secondary"
                             centered
                             variant="fullWidth"
                             onChange={handleChange}

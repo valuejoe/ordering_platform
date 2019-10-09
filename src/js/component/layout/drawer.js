@@ -9,9 +9,11 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ListIcon from "@material-ui/icons/List";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
+import MenuBookRoundedIcon from "@material-ui/icons/MenuBookRounded";
+import HistoryRoundedIcon from "@material-ui/icons/HistoryRounded";
 import { logoutAction } from "../../store/action/authAction";
-const drawerWidth = 240;
 
+const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex"
@@ -61,13 +63,13 @@ function ResponsiveDrawer(props) {
             <List>
                 <ListItem button component={Link} to="/order">
                     <ListItemIcon>
-                        <AddBoxIcon />
+                        <MenuBookRoundedIcon />
                     </ListItemIcon>
                     <ListItemText primary="訂單清單" />
                 </ListItem>
                 <ListItem button component={Link} to="/completed">
                     <ListItemIcon>
-                        <AddBoxIcon />
+                        <HistoryRoundedIcon />
                     </ListItemIcon>
                     <ListItemText primary="訂單紀錄" />
                 </ListItem>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route, BrowserRouter } from "react-router-dom";
 import ShoppingCar from "./component/shoppingCar/shopingCar";
 import ProductPage from "./component/product/productPage";
 import Login from "./component/auth/login";
@@ -12,7 +12,7 @@ import OrderList from "./component/management/order/orderList";
 import CompletedList from "./component/management/completed/completedList";
 const App = () => {
     return (
-        <HashRouter>
+        <BrowserRouter>
             <Switch>
                 <Route path="/login" component={Login} />
                 <ShopRoute exact path="/" component={ProductPage} />
@@ -26,7 +26,7 @@ const App = () => {
                     component={AuthManagement}
                 />
             </Switch>
-        </HashRouter>
+        </BrowserRouter>
     );
 };
 

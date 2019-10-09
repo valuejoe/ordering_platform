@@ -18,9 +18,8 @@ const Ordertable = props => {
             {order.length !== 0 ? (
                 order.map((doc, index) => {
                     return (
-                        <Fade in={true} timeout={500}>
+                        <Fade in={true} timeout={500} key={index}>
                             <ButtonBase
-                                key={index}
                                 style={{
                                     width: "100%",
                                     marginBottom: "10px"

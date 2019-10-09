@@ -7,6 +7,7 @@ import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import EditMenu from "./EditMenu";
 import { selectEditAction } from "../../store/action/UIActions";
 import { deleteMenuAction } from "../../store/action/manageAction";
+import API_PORT from "../../route/APIport";
 
 const MenuTableTitle = () => {
     return (
@@ -60,11 +61,11 @@ const MenuTableItem = props => {
                             <Grid item xs={2}>
                                 <CardMedia
                                     component="img"
-                                    alt="炸雞排"
+                                    alt={menuData.title}
                                     height="50"
                                     width="50"
-                                    image={`http://localhost:3030/public/${menuData._id}.jpg`}
-                                    title="炸雞排"
+                                    image={`${API_PORT}/public/${menuData._id}.jpg`}
+                                    title={menuData.title}
                                 />
                             </Grid>
                             <Grid item xs={3}>
