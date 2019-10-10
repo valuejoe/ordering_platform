@@ -47,9 +47,5 @@
 ## Demo
 
 ![Alt text](./img/home-pc.png)
-![Alt text](./img/home-mobile.png)
 ![Alt text](./img/manage-menu-pc.png)
 ![Alt text](./img/manage-pc.png)
-![Alt text](./img/manage-menu-mobile.png)
-![Alt text](./img/manage-mobile-1.png)
-![Alt text](./img/manage-mobile-2.png)
