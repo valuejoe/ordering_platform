@@ -1,6 +1,6 @@
 # Ordering platform
 
-點餐系統，主要結合客戶點餐介面及後台菜單管理系統
+點餐系統，結合客戶點餐介面及後台菜單管理系統。<br />
 後端程式碼[連結](https://github.com/valuejoe/ordering_plarform_server)
 
 ## 功能
