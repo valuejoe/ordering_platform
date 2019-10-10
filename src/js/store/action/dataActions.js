@@ -1,16 +1,10 @@
-import {
-    ADD_ORDER,
-    SELECT_ORDER,
-    DELETE_ORDER,
-    UPDATE_ORDER,
-    SUM_ORDER,
-    UPDATE_ORDER_COUNT,
-    FETCH_MENU,
-    FETCH_CATEGORY
-} from "./type";
+import { ADD_ORDER, SELECT_ORDER, DELETE_ORDER, UPDATE_ORDER } from "./type";
+import { SUM_ORDER, UPDATE_ORDER_COUNT, FETCH_MENU } from "./type";
+import { FETCH_CATEGORY, SUBMIT_ORDER } from "./type";
 import Axios from "axios";
 import API_PORT from "../../route/APIport";
 
+// get category action
 export const getCategoryAction = () => {
     return async dispatch => {
         try {
@@ -27,6 +21,7 @@ export const getCategoryAction = () => {
     };
 };
 
+// get menu action
 export const getMenuAction = () => {
     return async dispatch => {
         try {
@@ -38,6 +33,7 @@ export const getMenuAction = () => {
     };
 };
 
+// submit order to db
 export const submitOrderAction = data => {
     return async dispatch => {
         const order = { order: data };
@@ -46,6 +42,7 @@ export const submitOrderAction = data => {
                 `${API_PORT}/api/order`,
                 order
             );
+            dispatch({ type: SUBMIT_ORDER });
             window.location.reload();
         } catch (err) {
             console.log(err.response.data);
@@ -53,6 +50,7 @@ export const submitOrderAction = data => {
     };
 };
 
+// add order action
 export const addOrderAction = data => {
     return dispatch => {
         if (data.cost >= 0) {
@@ -63,6 +61,7 @@ export const addOrderAction = data => {
     };
 };
 
+// update order action
 export const updateOrderAction = data => {
     return dispatch => {
         if (data.cost <= 0) {
@@ -75,6 +74,7 @@ export const updateOrderAction = data => {
     };
 };
 
+// delete order action
 export const deleteOrderAction = data => {
     return dispatch => {
         dispatch({ type: DELETE_ORDER, payload: data });
@@ -83,6 +83,7 @@ export const deleteOrderAction = data => {
     };
 };
 
+// order count sum
 export const orderCostSumAction = data => {
     let sum = 0;
     data.map(data => {
@@ -92,11 +93,3 @@ export const orderCostSumAction = data => {
         dispatch({ type: SUM_ORDER, payload: sum });
     };
 };
-
-function sum(data) {
-    let sum = 0;
-    data.map(data => {
-        sum = data.cost + sum;
-    });
-    return sum;
-}

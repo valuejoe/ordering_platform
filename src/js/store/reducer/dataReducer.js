@@ -1,13 +1,6 @@
-import {
-    ADD_ORDER,
-    SELECT_ORDER,
-    DELETE_ORDER,
-    UPDATE_ORDER,
-    SUM_ORDER,
-    UPDATE_ORDER_COUNT,
-    FETCH_MENU,
-    FETCH_CATEGORY
-} from "../action/type";
+import { ADD_ORDER, SELECT_ORDER, DELETE_ORDER } from "../action/type";
+import { UPDATE_ORDER, SUM_ORDER, UPDATE_ORDER_COUNT } from "../action/type";
+import { FETCH_MENU, FETCH_CATEGORY, SUBMIT_ORDER } from "../action/type";
 
 const initState = {
     orderCostSum: 0,
@@ -80,6 +73,8 @@ const dataReducer = (state = initState, action) => {
                 ...state,
                 orderCountSum: newOrderCount
             };
+        case SUBMIT_ORDER:
+            return state;
         default:
             return state;
     }

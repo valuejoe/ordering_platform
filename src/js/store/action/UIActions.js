@@ -12,13 +12,14 @@ export const changeTabValueAction = data => {
     };
 };
 
-//Shopping car action
+// Shopping car action
 export const openShoppingCarAction = () => {
     return dispatch => {
         dispatch({ type: OPEN_SHOPPINGCAR });
     };
 };
 
+// close Shopping car action
 export const closeShoppingCarAction = () => {
     return dispatch => {
         dispatch({ type: CLOSE_SHOPPINGCAR });

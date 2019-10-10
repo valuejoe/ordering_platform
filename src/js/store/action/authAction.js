@@ -1,14 +1,9 @@
-import {
-    LOGIN,
-    LOGOUT,
-    SET_ERROR,
-    CLEAR_STATUS,
-    START_LOADING,
-    STOP_LOADING
-} from "../action/type";
+import { LOGIN, LOGOUT, SET_ERROR, CLEAR_STATUS } from "../action/type";
+import { START_LOADING, STOP_LOADING } from "../action/type";
 import Axios from "axios";
 import API_PORT from "../../route/APIport";
 
+// login action
 export const loginAction = (data, history) => {
     return async dispatch => {
         dispatch({ type: CLEAR_STATUS });
@@ -30,6 +25,7 @@ export const loginAction = (data, history) => {
     };
 };
 
+// logout action
 export const logoutAction = () => {
     return dispatch => {
         localStorage.removeItem("IdToken");
@@ -37,6 +33,8 @@ export const logoutAction = () => {
         dispatch({ type: LOGOUT });
     };
 };
+
+// set auth header
 const setAuthorizationHeader = token => {
     localStorage.setItem("IdToken", token);
     Axios.defaults.headers.common["Authorization"] = token;

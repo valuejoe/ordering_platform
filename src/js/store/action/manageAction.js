@@ -1,25 +1,12 @@
 import Axios from "axios";
 import API_PORT from "../../route/APIport";
-import {
-    SET_ERROR,
-    CLEAR_STATUS,
-    SET_SUCCESS,
-    ADD_CATEGORY,
-    ADD_MENU,
-    GET_CATEGORY,
-    GET_MENU,
-    UPDATE_MENU,
-    SELECT_EDIT,
-    START_LOADING,
-    STOP_LOADING,
-    UPDATE_CATEGORY,
-    DELETE_MENU,
-    DELETE_CATEGORY,
-    GET_ORDER,
-    COMPLETED_ORDER,
-    GET_COMPLETED
-} from "./type";
+import { SET_ERROR, SET_SUCCESS, ADD_CATEGORY, ADD_MENU } from "./type";
+import { GET_CATEGORY, GET_MENU, GET_ORDER, GET_COMPLETED } from "./type";
+import { DELETE_CATEGORY, DELETE_MENU, UPDATE_CATEGORY } from "./type";
+import { UPDATE_MENU, SELECT_EDIT, START_LOADING, STOP_LOADING } from "./type";
+import { COMPLETED_ORDER, CLEAR_STATUS } from "./type";
 
+// complete order action
 export const completedAction = data => {
     return async dispatch => {
         try {
@@ -35,12 +22,14 @@ export const completedAction = data => {
     };
 };
 
+// clear status action
 export const clearStatusAction = () => {
     return dispatch => {
         dispatch({ type: CLEAR_STATUS });
     };
 };
 
+// get order action
 export const getOrderAction = () => {
     return async dispatch => {
         try {
@@ -52,6 +41,7 @@ export const getOrderAction = () => {
     };
 };
 
+// get completed order action
 export const getCompletedAction = () => {
     return async dispatch => {
         try {
@@ -64,6 +54,8 @@ export const getCompletedAction = () => {
         }
     };
 };
+
+//get category action
 export const getCategoryAction = () => {
     return async dispatch => {
         try {
@@ -77,6 +69,7 @@ export const getCategoryAction = () => {
     };
 };
 
+//get menu action
 export const getMenuAction = () => {
     return async dispatch => {
         try {
@@ -88,6 +81,7 @@ export const getMenuAction = () => {
     };
 };
 
+// add category action
 export const addCategoryAction = data => {
     return async dispatch => {
         dispatch({ type: CLEAR_STATUS });
@@ -113,9 +107,9 @@ export const addCategoryAction = data => {
     };
 };
 
+// add menu action
 export const addMenuAction = (data, filedata) => {
     return async dispatch => {
-        console.log(data);
         dispatch({ type: CLEAR_STATUS });
         let { errors, isError } = MenuValidation(data);
         if (isError) {
@@ -145,7 +139,7 @@ export const addMenuAction = (data, filedata) => {
     };
 };
 
-//update Menu
+// update Menu
 export const updateMenuAction = (data, filedata) => {
     return async dispatch => {
         dispatch({ type: START_LOADING });
@@ -199,7 +193,7 @@ export const updateCategoryAction = data => {
     };
 };
 
-//delete menu
+// delete menu action
 export const deleteMenuAction = data => {
     return async dispatch => {
         try {
@@ -218,7 +212,7 @@ export const deleteMenuAction = data => {
     };
 };
 
-//delete category
+// delete category action
 export const deleteCategoryAction = data => {
     return async dispatch => {
         try {
@@ -234,8 +228,8 @@ export const deleteCategoryAction = data => {
     };
 };
 
+// validate menu format
 const MenuValidation = data => {
-    console.log(data);
     let errors = {};
     // is empty
     if (data.title.trim() == "") errors.title = "您尚未填寫商品名稱";
@@ -246,15 +240,15 @@ const MenuValidation = data => {
     return { errors, isError: Object.keys(errors).length === 0 ? false : true };
 };
 
+// validate category format
 const CategoryValidation = data => {
     let errors = {};
     if (data.name.trim() == "") errors.name = "您尚未填寫分類名稱";
     return { errors, isError: Object.keys(errors).length === 0 ? false : true };
 };
 
+// handle error
 const handleError = data => {
-    console.log(data.message);
-
     let errors = {};
     if (data.message === "Category already exist") errors = "分類名稱已存在";
     if (data.message === "Category reached the maximum number")

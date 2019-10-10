@@ -7,6 +7,7 @@ export const SUM_ORDER = "SUM_ORDER";
 export const UPDATE_ORDER_COUNT = "UPDATE_ORDER_COUNT";
 export const FETCH_MENU = "FETCH_MENU";
 export const FETCH_CATEGORY = "FETCH_CATEGORY";
+export const SUBMIT_ORDER = "SUBMIT_ORDER";
 
 //UI reducer
 export const START_LOADING = "START_LOADING";
