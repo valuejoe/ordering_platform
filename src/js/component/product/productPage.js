@@ -7,7 +7,7 @@ const TabPanel = props => {
     const { value, index, category } = props;
     const { product } = useSelector(state => state.data);
     return (
-        <Fade in={value === index}>
+        <Fade in={value === index} timeout={500}>
             <Container hidden={value !== index}>
                 <Grid
                     container
